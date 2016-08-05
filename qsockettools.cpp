@@ -117,6 +117,10 @@ void QSocketTools::tcpreadDataReceiveServer_cb()
          char *message = buffer.data();
          QString data = QString(QLatin1String(message));
    ui->tb_tcpclient_receivedata->append(data);
+
+   //add receiveCount
+   this->receiveCount += data.length();
+   ui->le_receiveCount->setText(QString::number(this->receiveCount, 10));
 }
 
 void QSocketTools::on_pb_tcpclient_connect_clicked()
@@ -141,6 +145,12 @@ void QSocketTools::on_pb_tcpclient_send_data_clicked()
        char* pstr = (char*)bytearray.data();
 
        this->tcpSocket->write((const char *)pstr,strlen(pstr));
+
+       //add sendCount
+       this->sendCount += strlen(pstr);
+       ui->le_sendCount->setText(QString::number(this->sendCount,10));
+
+
 }
 
 void QSocketTools::on_pb_tcpclient_clear_send_data_clicked()
@@ -225,4 +235,16 @@ void QSocketTools::on_pb_udp_pause_receive_data_clicked()
 void QSocketTools::on_pb_udp_clear_receive_data_clicked()
 {
 
+}
+
+void QSocketTools::on_pb_clearReceiveCount_clicked()
+{
+    this->receiveCount = 0;
+    ui->le_receiveCount->setText(QString::number(this->receiveCount, 10));
+}
+
+void QSocketTools::on_pb_clearSendCount_clicked()
+{
+    this->sendCount = 0;
+    ui->le_sendCount->setText(QString::number(this->sendCount,10));
 }

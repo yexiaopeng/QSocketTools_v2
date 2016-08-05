@@ -30,7 +30,8 @@ private:
     QString ipAddress;
      quint16 blockSize;
     char SecurityData[32];
-
+    long int receiveCount = 0;
+    long int sendCount = 0;
 
     bool isShowTcpReceiveData;
     bool isShowTcpRecevieData_date;
@@ -92,6 +93,10 @@ private slots:
     void on_pb_udp_pause_receive_data_clicked();
 
     void on_pb_udp_clear_receive_data_clicked();
+
+    void on_pb_clearReceiveCount_clicked();
+
+    void on_pb_clearSendCount_clicked();
 
 private:
     Ui::QSocketTools *ui;
